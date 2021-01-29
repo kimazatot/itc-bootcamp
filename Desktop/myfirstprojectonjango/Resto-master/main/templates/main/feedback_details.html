@@ -1,0 +1,73 @@
+{% extends 'main/wrapper.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-4 mt-5">
+            <div class="shadow-lg p-3 mb-3 bg-info rounded py-3 text-center text-light"
+                style="font-family: 'Times New Roman', Times, serif;">
+                <h3 class="mb-0">{{ object.author.first_name }} {{ object.author.last_name }}
+                </h3>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="shadow p-4 mt-2 bg-white rounded text-center">
+                <em>
+                    <h5 class="mb-0">
+                        {{ object.feedback_text }}
+                    </h5>
+                </em>
+            </div>
+            {% if object.author == user %}
+            <div class="col-12 text-center mt-2">
+                <a type="button" class="btn btn-primary" style="color: rgb(233, 233, 217);" href="{% url 'feedback-update' object.pk %}">Изменить</a>
+                <a class="btn btn-dark" style="color:rgb(233, 233, 217);"
+                    href="{% url 'feedback-delete' object.pk %}">Удалить</a>
+            </div>
+            {% endif %}
+        </div>
+
+
+        <div class="col-12 mt-5 text-center">
+            <div class="panel panel-default widget">
+                <div class="panel-heading mb-3">
+                    <span class="glyphicon glyphicon-comment"></span>
+                    <h3 class="panel-title">
+                        Последние Комментарии
+                    </h3>
+                    <h6 class="label label-info">Всего Комментариев: {{ object.comment_set.all|length }}</h6>
+                </div>
+            </div>
+        </div>
+        {% for comment in comment_list %}
+        <div class="col-7 text-center">
+            <div class="border border-success rounded-pill my-3 py-3">
+                <div class="mb-2">
+                    <img src="{{ comment.author_image.url }}" class="rounded-circle"
+                        alt="{{ comment.author.first_name }} {{ comment.author.last_name }}" width="80px"
+                        height="80px" />
+                </div>
+
+                <div class="col-12 mb-2">
+                    <strong class="mb-3">
+                        <em>{{ comment.comment_text }}</em>
+                    </strong>
+                </div>
+
+                <div class="font-weight-bold">
+                    Создано:
+                    <em class="text-muted">{{ comment.date_created }}</em>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
+
+
+
+<!-- 
+
+{{ object.date_created|date:"H:i d/j/y"}} -->

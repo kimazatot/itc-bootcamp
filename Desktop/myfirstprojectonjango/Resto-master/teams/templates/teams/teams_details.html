@@ -1,0 +1,31 @@
+{% extends 'main/wrapper.html' %}
+{% block content %}
+<div class="container bg-white section-padding">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-4">
+                <div class="team-card mb-5">
+                    <img class="img-fluid" src="{{ object.user.profile.user_profile_photo.url }}" alt="">
+                    <h4 class="mb-0">{{ object.first_name }} {{ object.last_name }}</h4>
+                </div>
+            </div>
+            <div class="heading-section">
+                <h2>
+                    <span class="subheading">
+                        {{ object.user.first_name }} {{ object.user.last_name }}
+                    </span>
+                </h2>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <div class="card-header">
+                    <strong>{{ object.position }}</strong>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><strong>Опыт работы:</strong> {{ object.experience }} лет</li>
+                    <li class="list-group-item"><strong>История работы:</strong> {{ object.companies }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

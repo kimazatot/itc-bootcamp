@@ -1,0 +1,47 @@
+{% extends 'main/wrapper.html' %}
+{% load static %}
+{% block content%}
+
+<div class="container-fluid bg-fixed bg-white section-padding overlay"
+    style="background-image: url({% static 'img/login-bg.jpg' %});">
+    <div class="row justify-content-around">
+        <div class="section-content bg-white shadow py-5 text-center w-25">
+            <div class="heading-section">
+                <h2>
+                    <span class="subheading">
+                        Войти
+                    </span>
+                </h2>
+            </div>
+            <form method="POST" name="login" action="{% url 'login' %}">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-6 mx-auto mb-4">
+                        <strong class="ml-1 font-weight-bold">{{ form.username.label_tag }}</strong>
+                        {{ form.username }}
+                        <br>
+                        <br>
+
+                        <strong class="ml-1 font-weight-bold">{{ form.password.label_tag }}</strong>
+                        {{ form.password }}
+                    </div>
+
+                    <div class="col-12 text-center">
+                        {% if form.errors %}
+                        {% for v in form.errors.values %}
+                        <div class="alert alert-danger">{{ v }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-12">
+                        <div class="justify-content-center">
+                            <button class="btn btn-primary btn-shadow btn-lg" type="submit" name="submit">Войти</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content%}

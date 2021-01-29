@@ -1,0 +1,80 @@
+{% extends 'main/wrapper.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container bg-white section-padding">
+    <div class="container">
+        <div class="section-content">
+            <div class="heading-section text-center">
+                <h2>
+                    <span class="subheading">
+                        Наша Команда
+                    </span>
+                </h2>
+            </div>
+            <div class="row">
+                {% for member in teammember_list %}
+                <div class="col-4">
+                    <div class="team-card mb-5">
+                        <a href="{% url 'teams:member-details' member.pk %}"><img class="img-fluid" src="{{ member.user.profile.user_profile_photo.url }}" alt=""></a>
+                        <div class="team-desc">
+                            <h4 class="mb-0">{{ member.user.first_name }} {{ member.user.last_name }}</h4>
+                            <ul class="list-inline mb-0 team-social-links">
+                                <li class="list-inline-item">
+                                    <a href="#">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#">
+                                        <i class="fab fa-google-plus-g"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 text-center">
+        <form method="POST">
+            {% csrf_token %}
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                style="color: whitesmoke;">
+                Добавить Персонал
+            </button>
+
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Форма добавления</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            {{ form|crispy }}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Добавить</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отменить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}

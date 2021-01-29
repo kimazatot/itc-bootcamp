@@ -1,0 +1,44 @@
+{% extends 'main/wrapper.html' %}
+
+{% block content %}
+<section id="gtco-special-dishes" class="bg-grey section-padding">
+    <div class="container">
+        <div class="section-content text-center">
+            <div class="heading-section">
+                <h2>
+                    <span class="subheading">
+                        {{object.name}}
+                    </span>
+                </h2>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-4"></div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+
+                    <div class="img-thumbnail rounded">
+                        <img src="{{ object.meal_image.url }}" alt="{{ object.meal_image }}" style="max-width: 100%; height: auto;">
+                    </div>
+
+
+                    <div class="my-3">
+                        {{object.kitchen}}
+                    </div>
+
+                    <div class="mt-2">
+                        <h6>{{object.ingredients}}</h6>
+                    </div>
+
+                    <div class="mt-2">
+                        <span class="subheading">
+                            {{object.price}} сом
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-4"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

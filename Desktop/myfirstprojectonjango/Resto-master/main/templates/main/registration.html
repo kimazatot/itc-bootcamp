@@ -1,0 +1,68 @@
+{% extends 'main/wrapper.html' %}
+{% load static %}
+{% block content%}
+
+<div class="container-fluid bg-fixed bg-white section-padding overlay"
+    style="background-image: url({% static 'img/login-bg.jpg' %});" height="900px">
+    <div class="row justify-content-around">
+        <div class="section-content bg-white shadow py-5 text-center w-25">
+            <div class="heading-section">
+                <h2>
+                    <span class="subheading">
+                        Регистрация
+                    </span>
+                </h2>
+            </div>
+            <form method="POST" name="registration">
+                {% csrf_token %}
+                <div class="row justify-content-center">
+                    <div class="col-6">
+                        <strong class="ml-1">{{ sign_in_form.username.label_tag }}</strong>
+                        <br>
+                        {{ sign_in_form.username }}
+                        <br>
+
+                        <strong class="ml-1">{{ sign_in_form.first_name.label_tag }}</strong>
+                        <br>
+                        {{ sign_in_form.first_name }}
+                        <br>
+                        
+                        <strong class="ml-1">{{ sign_in_form.last_name.label_tag }}</strong>
+                        <br>
+                        {{ sign_in_form.last_name }}
+                        <br>
+
+                        <strong class="ml-1">{{ sign_in_form.email.label_tag }}</strong>
+                        <br>
+                        {{ sign_in_form.email }}
+                        <br>
+
+                        <strong class="ml-1">{{ sign_in_form.password1.label_tag }}</strong>
+                        <br>
+                        {{ sign_in_form.password1 }}
+                        <br>
+
+                        <strong class="ml-1">{{ sign_in_form.password2.label_tag }}</strong>
+                        <br>
+                        {{ sign_in_form.password2 }}
+                    </div>
+
+                    <div class="col-md-12 text-center">
+                        {% if sign_in_form.errors %}
+                        {% for v in sign_in_form.errors.values %}
+                        <div class="alert alert-danger">{{ v }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <div class="col-6 mt-4">
+                        <button class="btn btn-primary btn-shadow btn-lg" type="submit"
+                            name="submit">Зарегистрироваться</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content%}

@@ -1,0 +1,23 @@
+{% extends 'main/wrapper.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-around">
+        <div class="col-12 mt-4">
+            <div class="form-group">
+                <div class="col-12 text-center">
+                    <h3>Вы уверены что хотите удалить свой отзыв?</h3>
+                    <h5 class="mt-5">{{ object.feedback_text }}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <form method="POST">
+                {% csrf_token %}
+                <button class="btn btn-info" type="submit" style="color: beige;">Да!</button>
+                <a class="btn btn-danger" style="color: beige;" href="{% url 'feedback-details' object.pk %}">Нет...</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

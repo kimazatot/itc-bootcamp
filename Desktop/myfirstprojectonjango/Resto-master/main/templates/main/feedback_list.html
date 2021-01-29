@@ -1,0 +1,73 @@
+{% extends 'main/wrapper.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center text-center">
+        {%if user.is_authenticated %}
+        <div class="col-3"></div>
+        <div class="col-9 mb-5">
+            {% else %}
+            <div class="col-12 mb-5">
+                {% endif %}
+                <span class="subheading">
+                    <h2>
+                        Отзывы
+                    </h2>
+                </span>
+            </div>
+            {% if user.is_authenticated %}
+            <div class="col-lg-3 col-md-6 col-sm-6 mb-5">
+                <div class="card text-center">
+                    <div class="mt-2">
+                        <h1>{{ user.username }}</h1>
+                        <p class="bg-dark w-100 text-light py-2 font-weight-bold">Всего Отзывов:
+                            {{user.feedback_set.all|length }}
+                        </p>
+                        <div class="mb-3">
+                            <a class="btn btn-primary" style="color: whitesmoke;" href="{% url 'feedback-create' %}">Оставить Отзыв</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                {% else %}
+                <div class="col-12">
+                    {% endif %}
+                    <div class="row justify-content-center">
+
+                        {% if object_list|length > 0 %}
+                        {% for f in object_list %}
+                        {% if user.is_authenticated %}
+                        <div class="col-lg-5 col-md-8 col-sm-12 mb-3 mx-4">
+                            {% else %}
+                            <div class="col-lg-4 col-md-8 col-sm-12 mb-3">
+                                {% endif %}
+                                <div class="card text-center" style="height: 300px;">
+                                    <div class="card-header bg-info pb-1">
+                                        <p class="font-weight-bold text-light">
+                                            {{ f.author.first_name }} {{f.author.last_name }}
+                                        </p>
+                                    </div>
+                                    <div class="card-body pb-0">
+                                        <p class="card-text align-middle">
+                                            <em>{{ f.feedback_text|truncatechars:100}}</em>
+                                        </p>
+                                    </div>
+                                    <p class="bg-dark w-100 text-light py-1">
+                                        <strong>{{ f.date_created|date:"H:i d/j/y"}}</strong>
+                                    </p>
+                                    <a class="btn btn-outline-info mb-2" href="{% url 'feedback-details' f.pk %}"
+                                        style="color: rgb(33, 74, 88);">Читать дальше</a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

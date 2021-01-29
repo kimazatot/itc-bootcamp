@@ -1,0 +1,80 @@
+{% extends 'main/wrapper.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<section id="gtco-reservation" class="bg-fixed bg-white section-padding overlay"
+    style="background-image: url({% static 'img/reservation-bg.jpg' %});">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="section-content bg-white p-5 shadow">
+                    <div class="heading-section text-center">
+                        <h2>
+                            <span class="subheading">
+                                Resto Бронь
+                            </span>
+                        </h2>
+
+                    </div>
+                    <form method="POST" name="orders" class="text-center">
+                        {% csrf_token %}
+                        <div class="col-12 form-group">
+                            <div class="col-12">
+                                {{ book_form.phone.label_tag }}
+                            </div>
+                            <div class="col-12">
+                                {{ book_form.phone }}
+                            </div>
+                        </div>
+
+                        <div class="d-flex">
+                            <div class="col-md-6 form-group px-0">
+                                {{ book_form.date.label_tag }}
+                                <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
+                                    {{ book_form.date }}
+                                    <div class="input-group-append" data-target="#datetimepicker4"
+                                        data-toggle="datetimepicker">
+                                        <div class="input-group-text">
+                                            <span class="lnr lnr-calendar-full"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 form-group px-0">
+                                {{ book_form.time.label_tag }}
+                                <div class="col-12 form-group">
+                                    {{ book_form.time }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 form-group">
+                            <div class="col-12">
+                                {{ book_form.persons.label_tag }}
+                            </div>
+                            <div class="col-12 px-5">
+                                {{ book_form.persons }}
+                            </div>
+                        </div>
+
+                        <div class="col-12 form-group">
+                            {{ book_form.message.label_tag }}
+                            {{ book_form.message }}
+                        </div>
+
+                        <div class="text-center">
+                            <div class="form-group">
+                                <button class="btn btn-warning" type="submit" style="color: rgb(87, 79, 79);">
+                                    <b>Бронировать</b></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endblock content %}

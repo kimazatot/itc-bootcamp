@@ -1,0 +1,79 @@
+{% extends 'main/wrapper.html' %}
+{% load static %}
+
+{% block content %}
+<section id="gtco-special-dishes" class="bg-grey section-padding">
+    <div class="container">
+        <div class="section-content">
+            <div class="heading-section text-center">
+                <h2>
+                    <span class="subheading">
+                        Лучшие Вина
+                    </span>
+                </h2>
+            </div>
+            {% for object in wines_first_priority %}
+            <div class="row mt-5">
+
+                <div class="col-lg-4 offset-lg-2 col-md-6 align-self-center mt-4 mt-md-0">
+                    <a href="{% url 'menu:wine-details' object.pk %}">
+                        <img src="{{ object.wine_image.url }}" alt="" class="img-fluid shadow w-100">
+                    </a>
+                </div>
+
+                <div class="col-lg-4 col-md-6 align-self-center py-5 ml-5">
+                    <h2 class="special-number">0{{object.pk}}.</h2>
+                    <div class="dishes-text">
+                        <h3><span>{{ object.name }}</span><br>{{ object.category }} {{ object.color }}</h3>
+                        <p class="pt-3">{{ object.description }}</p>
+                        <h3 class="special-dishes-price">{{ object.price }} сом</h3>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section id="gtco-menu" class="section-padding">
+    <div class="container">
+        <div class="section-content">
+            <div class="row mb-5">
+                <div class="col-md-12">
+                    <div class="heading-section text-center">
+                        <h2>
+                            <span class="subheading">
+                                Каталог
+                            </span>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="menu-wrap">
+                    <div class="heading-menu">
+                        <h3 class="text-center mb-5">Основные Вина</h3>
+                    </div>
+                    {% for wine in wines_other_priority %}
+                    <div class="menus d-flex align-items-center">
+                        <div class="menu-img rounded-circle">
+                            <img class="img-fluid" src="{{ wine.wine_image.url }}" alt="{{ meal.name }}">
+                        </div>
+                        <div class="text-wrap">
+                            <div class="row align-items-start">
+                                <div class="col-8">
+                                    <h4>{{ wine.name }}</h4>
+                                </div>
+                                <div class="col-4">
+                                    <h4 class="text-muted menu-price">{{ wine.price }} сом</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
